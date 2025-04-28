@@ -4,11 +4,12 @@ import '../styles/global.css';
 
 // data source
 // replace temporary JSON placeholder API
-const source = 'https://jsonplaceholder.typicode.com/users';
+const source = "https://dedline-api.netlify.app/states.json";
+
 // fetch the data
 const res = await fetch(source); 
 // store retreived data
-const data = await res.json();
+const states = (await res.json()).states;
 ---
 
 <html lang="en">
@@ -35,14 +36,15 @@ const data = await res.json();
 		  
 				<!-- Your API Data -->
 				{
-					data.map( item =>
+					states.map( state =>
 					<li class="card-item">
 						<a href="#">
 							<figure class="card">
 							<img src="https://assets.codepen.io/16425/image-placeholder.png" alt="Placeholder">
 							<figcaption class="caption">
-								<h3 class="caption-title">{item.name}</h3>
-								<p>{item.company.catchPhrase}</p>
+								<h3 class="caption-title">{state.label}  {state.emoji}</h3>
+								<p>Deadline: {state.deadline}</p>
+								<p>Online accepted: {state.onlineAccepted?"✅":"❌"}</p>
 							</figcaption>
 							</figure>
 						</a>
